@@ -1,50 +1,43 @@
 {
-  "name": "auralis",
-  "productName": "auralis",
-  "version": "1.0.0",
-  "description": "My Electron application description",
-  "main": ".vite/build/main.js",
-  "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
-  },
-  "keywords": [],
-  "author": {
-    "name": "Fernando Divino de Moraes Júnior",
-    "email": "kinggprobr@gmail.com"
-  },
-  "license": "MIT",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "electron",
-      "electron-winstaller"
-    ]
-  },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
-  "devDependencies": {
-    "@electron-forge/cli": "^7.10.2",
-    "@electron-forge/maker-deb": "^7.10.2",
-    "@electron-forge/maker-rpm": "^7.10.2",
-    "@electron-forge/maker-squirrel": "^7.10.2",
-    "@electron-forge/maker-zip": "^7.10.2",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.10.2",
-    "@electron-forge/plugin-fuses": "^7.10.2",
-    "@electron-forge/plugin-vite": "^7.10.2",
-    "@electron-forge/publisher-github": "^7.10.2",
-    "@electron/fuses": "^1.0.0",
-    "@types/electron-squirrel-startup": "^1.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "electron": "39.0.0",
-    "eslint": "^8.0.1",
-    "eslint-plugin-import": "^2.25.0",
-    "typescript": "~4.5.4",
-    "vite": "^5.0.12"
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
-  }
+	"name": "kodo",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"main": "dist-electron/main.js",
+	"scripts": {
+		"dev": "npm-run-all --parallel dev:react dev:electron",
+		"dev:react": "vite",
+		"dev:electron": "npm run transpile:electron && cross-env NODE_ENV=development electron .",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"transpile:electron": "tsc --project src/electron/tsconfig.json",
+		"dist:mac": "npm run transpile:electron && npm run build && electron-builder --mac --arm64",
+		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64",
+		"dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64",
+		"test:e2e": "playwright test",
+		"test:unit": "vitest src"
+	},
+	"dependencies": {
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.36.0",
+		"@types/node": "^24.6.0",
+		"@types/react": "^19.1.16",
+		"@types/react-dom": "^19.1.9",
+		"@vitejs/plugin-react": "^5.0.4",
+		"cross-env": "^10.1.0",
+		"electron": "^39.1.1",
+		"electron-builder": "^26.0.12",
+		"eslint": "^9.36.0",
+		"eslint-plugin-react-hooks": "^5.2.0",
+		"eslint-plugin-react-refresh": "^0.4.22",
+		"globals": "^16.4.0",
+		"npm-run-all": "^4.1.5",
+		"typescript": "~5.9.3",
+		"typescript-eslint": "^8.45.0",
+		"vite": "^7.1.7"
+	},
+	"packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }
